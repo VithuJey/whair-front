@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: 'MabryPro-Regular' 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*{
+  font-family:'MabryPro-Regular';
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+::selection {
+  background: #333; 
+  color: white;
+}
+::-moz-selection {
+  background: #333; 
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* .userItem{
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.1);
+box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.1);
+} */
+
+.digestive{
+  font-family: 'Digestivev0.11trial-small';
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.MainFooter{
+  height: 200px;
+  background: #CFD4D9;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3em;
+}
+
+.MainFooter a{
+  margin: 0em 2em;
+  font-size: .75em;
+  color: #666;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
