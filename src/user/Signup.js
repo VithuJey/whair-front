@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { signup } from '../auth'
+import {Redirect} from 'react-router-dom'
 
 export default class Signup extends Component {
     constructor() {
@@ -9,8 +10,7 @@ export default class Signup extends Component {
              email: "",
              password: "",
              error: "",
-             open: false
-        }
+             open: false        }
     }
     handleChange = (input) => (event) => {
         this.setState({error: ""})
@@ -39,8 +39,14 @@ export default class Signup extends Component {
             })
     }
     
+    
     render() {
         const {name, email, password, error, open} = this.state
+
+        // Redirect to Signin on successful sign up
+        if(open){
+            return <Redirect to={`/signin`}/>
+        }
         return (
             <div className="container flex w-100 items-center justify-start">
                 <div className="form pa4 ma5 ba b--light-gray h-40" style={{width: "360px"}}>
