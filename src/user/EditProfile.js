@@ -104,6 +104,7 @@ export default class EditProfile extends Component {
                             redirectToProfile: true
                         })
                     })
+                   
                     
               })
         }
