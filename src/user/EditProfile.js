@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { isAuthenticated } from '../auth'
 import { read, update, updateUser } from './apiUser'
 import {Redirect} from 'react-router-dom'
-import defaultProfileImage from '../images/default-user-image.jpg'
+import defaultProfileImage from '../images/default-user-image.png'
 
 
 export default class EditProfile extends Component {
@@ -18,6 +18,7 @@ export default class EditProfile extends Component {
             contactInsta : "",
             contactPhone : "",
             redirectToProfile: false,
+            prevSalon: [],
             error: "",
             authorized: false
         }
@@ -37,6 +38,8 @@ export default class EditProfile extends Component {
                     email: data.email,
                     about: data.about,
                     contactInsta: data.contactInsta,
+                    prevSalon: data.prevSalon,
+                    prevSalonName: data.prevSalon.prevSalonName,
                     contactPhone: data.contactPhone,
                     currentSalonName: data.currentSalonName,
                     currentSalonDateStart: data.currentSalonDateStart,
@@ -60,17 +63,15 @@ export default class EditProfile extends Component {
                 authorized: false
             })
         }
-
-
         this.userData = new FormData()
         const userId = this.props.match.params.userId
         this.init(userId)
     }    
     isValid = () => {
         const { name, email, fileSize } = this.state
-        if(fileSize > 100000){
+        if(fileSize > 250000){
             this.setState({
-                error: "File size should be less than 100kb",
+                error: "File size should be less than 250kb",
                 loading: false
             })
             return false
@@ -136,6 +137,8 @@ export default class EditProfile extends Component {
                 contactInsta, 
                 contactPhone, 
                 redirectToProfile, 
+                prevSalon,
+                prevSalonName,
                 loading,
                 authorized
             } = this.state
@@ -154,98 +157,97 @@ export default class EditProfile extends Component {
 
 
         if(isAuthenticated().user && isAuthenticated().user._id === this.props.match.params.userId){
-
+            const initials = name.replace(/\s/g, "+")
             return (
-                <div className="container flex w-100 items-center justify-start">
-                    <div className="form pa4 ma5 h-40" style={{width: "360px"}}>
-                    <h1 className="fw3 mt2 mb4 dark-gray">Edit profile</h1>
-                    <div className="f6 alert dark-red" style={{display: error ? '' : 'none'}}>{error}</div>
-                    {loading ? <div> <h2 className="f6 alert dark-green">Loading</h2></div> : ""}
-                    <img src={photoUrl} alt={name} onError={i => (i.target.src = `${defaultProfileImage}`)}/>
-                    <form>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Profile photo</label>
-                            <input 
-                                onChange={this.handleChange("photo")} 
-                                type="file"
-                                accept="image/*" 
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100"
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Name</label>
-                            <input 
-                                onChange={this.handleChange("name")} 
-                                type="text" 
-                                value={name}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100"
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Email</label>
-                            <input 
-                                onChange={this.handleChange("email")} 
-                                type="email"
-                                value={email}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">About</label>
-                            <textarea 
-                                onChange={this.handleChange("about")} 
-                                type="text" 
-                                value={about}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100"
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Current salon</label>
-                            <input 
-                                onChange={this.handleChange("currentSalonName")} 
-                                type="text"
-                                value={currentSalonName}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Current salon start date</label>
-                            <input 
-                                onChange={this.handleChange("currentSalonDateStart")} 
-                                type="text"
-                                value={currentSalonDateStart}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Phone</label>
-                            <input 
-                                onChange={this.handleChange("contactPhone")} 
-                                type="text"
-                                value={contactPhone}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                            />
-                        </div>
-                        <div className="w-100 mt2 mb3">
-                            <label className="f6 b db mb2 mid-gray">Instagram</label>
-                            <input 
-                                onChange={this.handleChange("contactInsta")} 
-                                type="text"
-                                value={contactInsta}
-                                className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                            />
-                        </div>
-                        <span onClick={this.clickSubmit} className="link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib">Update</span>
-                    </form>
+                <div className="container flex w-100 items-center justify-start bg-near-white pa5">
+                    <div className="form bg-white w-40-ns w-100-m pa5" >
+                        <div className="f6 alert dark-red" style={{display: error ? '' : 'none'}}>{error}</div>
+                        {loading ? <div> <h2 className="f6 alert dark-green">Loading</h2></div> : ""}
+                        <img src={photoUrl} alt={name} className="w4 h4 br-100 mb5"  onError={i => (i.target.src = `https://eu.ui-avatars.com/api/?name=${initials}&size=128&background=999999&color=000000`)}/>
+                        <form>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Profile photo</label>
+                                <input 
+                                    onChange={this.handleChange("photo")} 
+                                    type="file"
+                                    accept="image/*" 
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100"
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Name</label>
+                                <input 
+                                    onChange={this.handleChange("name")} 
+                                    type="text" 
+                                    value={name}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100"
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Email</label>
+                                <input 
+                                    onChange={this.handleChange("email")} 
+                                    type="email"
+                                    value={email}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">About</label>
+                                <textarea 
+                                    onChange={this.handleChange("about")} 
+                                    type="text" 
+                                    value={about}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100"
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Current salon</label>
+                                <input 
+                                    onChange={this.handleChange("currentSalonName")} 
+                                    type="text"
+                                    value={currentSalonName}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Current salon start date</label>
+                                <input 
+                                    onChange={this.handleChange("currentSalonDateStart")} 
+                                    type="text"
+                                    value={currentSalonDateStart}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Phone</label>
+                                <input 
+                                    onChange={this.handleChange("contactPhone")} 
+                                    type="text"
+                                    value={contactPhone}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
+                                />
+                            </div>
+                            <div className="w-100 mt2 mb3">
+                                <label className="f6 db mb2 mid-gray">Instagram</label>
+                                <input 
+                                    onChange={this.handleChange("contactInsta")} 
+                                    type="text"
+                                    value={contactInsta}
+                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
+                                />
+                            </div>
+                            <span onClick={this.clickSubmit} className="link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib">Update</span>
+                        </form>
+                    </div>
                 </div>
-            </div>
             )
     }else {
         return(
             <div className="container flex flex-column w-100 items-center justify-center">
                 <h1 className="fw1 mv5">You're not authorised to do this you naughty hacker</h1>
-                <img src="https://media.giphy.com/media/w1XrYq5PsCbyE/giphy.gif"/>
-                {/* <img src="https://media.giphy.com/media/gNzDiRiZS3SXS/giphy.gif"/> */}
+                {/* <img src="https://media.giphy.com/media/w1XrYq5PsCbyE/giphy.gif"/> */}
+                <img src="https://media.giphy.com/media/gNzDiRiZS3SXS/giphy.gif"/>
                 {/* <img src="https://media.giphy.com/media/YQitE4YNQNahy/giphy.gif"/> */}
             </div>
         )

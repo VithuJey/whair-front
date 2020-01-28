@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import GoogleLogin from "react-google-login";
-import { socialLogin, authenticate } from "../auth";
-import {Redirect} from 'react-router-dom'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
+import { socialLogin, authenticate } from '../auth';
 
- 
 class SocialLogin extends Component {
     constructor() {
         super();
@@ -11,37 +10,35 @@ class SocialLogin extends Component {
             redirectToReferrer: false
         };
     }
- 
+
     responseGoogle = response => {
-        console.log(response);
-        const { googleId, name, email, imageUrl } = response.profileObj;
+        // console.log('response', response);
+        const tokenId = response.tokenId;
         const user = {
-            password: googleId,
-            name: name,
-            email: email,
-            imageUrl: imageUrl
+            tokenId: tokenId
         };
-        // console.log("user obj to social login: ", user);
+
         socialLogin(user).then(data => {
-            console.log("signin data: ", data);
+            // console.log('signin data: ', data);
             if (data.error) {
-                console.log("Error Login. Please try again..");
+                console.log('Error Login. Please try again..');
             } else {
-                console.log("signin success - setting jwt: ", data);
+                // console.log('signin success - setting jwt: ', data);
                 authenticate(data, () => {
+                    console.log('social login response from api', data);
                     this.setState({ redirectToReferrer: true });
                 });
             }
         });
     };
- 
+
     render() {
         // redirect
         const { redirectToReferrer } = this.state;
         if (redirectToReferrer) {
             return <Redirect to="/" />;
         }
- 
+
         return (
             <GoogleLogin
                 clientId="931174537181-1en2lifhv4g9oa99ve4hu3ncqcmt6oa6.apps.googleusercontent.com"
@@ -52,5 +49,7 @@ class SocialLogin extends Component {
         );
     }
 }
- 
+
 export default SocialLogin;
+
+

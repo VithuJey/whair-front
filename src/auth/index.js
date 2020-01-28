@@ -37,7 +37,7 @@ export const authenticate = (jwt, next) => {
         localStorage.setItem('jwt', JSON.stringify(jwt))
         next()
     }
-};
+}
 
 
 export const signout = next => {
@@ -57,13 +57,32 @@ export const isAuthenticated = () => {
     if (typeof window == 'undefined') {
         return false;
     }
-
     if (localStorage.getItem('jwt')) {
         return JSON.parse(localStorage.getItem('jwt'));
     } else {
         return false;
     }
-};
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// export const isAuthorized = () => {
+//     let userId = props.match.params.userId
+//     let authUser = undefined
+
+//     if (typeof window !== "undefined") {
+//         if (localStorage.getItem("jwt")) {
+//             let auth = JSON.parse(localStorage.getItem("jwt"));
+//             let authUser = auth.user
+//         } if(authUser === userId){
+//             console.log('they are the same')
+//         }
+//     }
+// };
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const forgotPassword = email => {
     console.log("email: ", email);

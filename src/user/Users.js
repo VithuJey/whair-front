@@ -9,6 +9,7 @@ class Users extends Component {
         this.state = {
             users: []
         }
+        console.log(this.state.users)
     }
     componentDidMount(){
         list().then(data => {
@@ -17,7 +18,6 @@ class Users extends Component {
             } else{
                 this.setState({
                     users: data
-                    
                 })
                 console.log(data)
             }
@@ -26,9 +26,9 @@ class Users extends Component {
     render() {
         const {users} = this.state
         return (
-            <div className="w-100 pa5">
-                <h1 className="fw3 dark-gray mb5">Directory</h1>
-                <div className="flex flex-wrap">
+            <div className="w-100 pa5" style={{background: "#F4F4F4"}}>
+                <h1 className="fw2 dark-gray mb4 tc-m">People <span className="black-10">—</span> {users.length}</h1>
+                <div className="flex justify-center-m flex-wrap">
                     { users.map((user, i) => (
                         <UserItem 
                             name={user.name} 
@@ -36,9 +36,12 @@ class Users extends Component {
                             key={i} 
                             profile={user._id}
                             alt={user.name}
-                            date={user.currentSalonName}
+                            date={new Date(user.created).toDateString()}
+                            currentSalonName={user.currentSalonName}
                         />
+                        
                     ))}
+                    
                 </div>
             </div>
         )

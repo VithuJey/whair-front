@@ -48,12 +48,12 @@ export default class Signin extends Component {
             return <Redirect to={`/`}/>
         }
         return (
-            <div className="container flex" >
+            <div className="container flex flex-wrap" >
                 <div className="ba br1 b--light-gray pa4 ma5" style={{width: "360px"}}>
                 <h1 className="fw3 mt2 mb4 dark-gray ">Sign in</h1>
                 <form>
                     <div className="w-100 mt2 mb3">
-                        <label className="f6 b db mb2 mid-gray">Email</label>
+                        <label className="f6 db mb2 mid-gray">Email</label>
                         <input 
                             onChange={this.handleChange("email")} 
                             type="email"
@@ -62,7 +62,7 @@ export default class Signin extends Component {
                         />
                     </div>
                     <div className="w-100 mt2 mb3">
-                        <label className="f6 b db mb2 mid-gray">Password</label>
+                        <label className="f6 db mb2 mid-gray">Password</label>
                         <input 
                             onChange={this.handleChange("password")} 
                             type="password" 
@@ -72,7 +72,7 @@ export default class Signin extends Component {
                     </div>
                     
                     <span onClick={this.clickSubmit} className="br1 link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib">Sign in</span>
-                    <Link to="/forgot-password" className="link moon-gray">{" "}Forgot password</Link>
+                    <Link to="/forgot-password" className="ml4 link moon-gray">{" "}Forgot password</Link>
                     <SocialLogin />
                 </form>
                 

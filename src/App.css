@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'MabryPro-Regular' 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Graphik-Regular','Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -12,10 +12,17 @@ code {
     monospace;
 }
 
-*{
-  font-family:'MabryPro-Regular';
+.fw3{
+  font-family:'Graphik-Regular';
+}
+.fw2{
+  font-family:'Graphik-Light';
 }
 
+section{
+  min-height: 40vh;
+  margin: 2em 0;
+}
 
 ::selection {
   background: #333; 
@@ -52,4 +59,56 @@ box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.1);
   letter-spacing: .2em;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+button {
+  display: inline-block;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #fff;
+  color: #333;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+  background-color: #333333;
+  border-color: #333333;
+  color: #fff;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+.userItem{
+  box-shadow: 0 12px 24px rgba(0,0,0,.05);
+  transition: all .25s ease-in-out;
+}
+.form{
+  box-shadow: 0 12px 24px rgba(0,0,0,.05);
+  transition: all .25s ease-in-out;
+}
+
+.userItem:hover{
+  box-shadow: 0 24px 36px rgba(0,0,0,.1);
+  transform: scale(1.01);
+}
+
+.form:hover{
+  box-shadow: 0 48px 48px rgba(0,0,0,.1);
 }
