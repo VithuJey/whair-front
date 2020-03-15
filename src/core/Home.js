@@ -20,14 +20,16 @@ class  Home extends React.Component {
         const token = isAuthenticated().token
         read(userId, token)
         .then(data => {
-            if(data.error){
-                this.setState({
-                    redirectToSignIn: true
-                })
-            } else {
-                this.setState({
-                    user: data
-                })
+            if(data){
+                if(data.error){
+                    this.setState({
+                        redirectToSignIn: true
+                    })
+                } else {
+                    this.setState({
+                        user: data
+                    })
+                }
             }
         })
     }

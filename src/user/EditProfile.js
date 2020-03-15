@@ -3,6 +3,8 @@ import { isAuthenticated } from '../auth'
 import { read, update, updateUser } from './apiUser'
 import {Redirect} from 'react-router-dom'
 import defaultProfileImage from '../images/default-user-image.png'
+import CurrentSalon from './components/CurrentSalon'
+import PreviousSalon from './components/PreviousSalon'
 
 
 export default class EditProfile extends Component {
@@ -20,8 +22,13 @@ export default class EditProfile extends Component {
             redirectToProfile: false,
             prevSalon: [],
             error: "",
-            authorized: false
+            authorized: false,
+            currentSalonComponentList : [].concat(<CurrentSalon />),
+            previousSalonComponentList : [].concat(<PreviousSalon />)
         }
+
+        this.createCurrentSalon = this.createCurrentSalon.bind(this);
+        
     }
     init = (userId) => {
         const token = isAuthenticated().token
@@ -125,6 +132,24 @@ export default class EditProfile extends Component {
         }
     }
 
+    createCurrentSalon = event => {
+        event.preventDefault()
+        const currentSalonComponentList = this.state.currentSalonComponentList;
+        this.setState({
+            currentSalonComponentList: currentSalonComponentList.concat(<CurrentSalon key= 
+             {currentSalonComponentList.length} />)
+        });
+      }
+
+      createPreviousSalon = event => {
+        event.preventDefault()
+        const previousSalonComponentList = this.state.previousSalonComponentList;
+        this.setState({
+            previousSalonComponentList: previousSalonComponentList.concat(<PreviousSalon key= 
+             {previousSalonComponentList.length} />)
+        });
+      }
+
     render() {
         const {
                 id,
@@ -202,24 +227,6 @@ export default class EditProfile extends Component {
                                 />
                             </div>
                             <div className="w-100 mt2 mb3">
-                                <label className="f6 db mb2 mid-gray">Current salon</label>
-                                <input 
-                                    onChange={this.handleChange("currentSalonName")} 
-                                    type="text"
-                                    value={currentSalonName}
-                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                                />
-                            </div>
-                            <div className="w-100 mt2 mb3">
-                                <label className="f6 db mb2 mid-gray">Current salon start date</label>
-                                <input 
-                                    onChange={this.handleChange("currentSalonDateStart")} 
-                                    type="text"
-                                    value={currentSalonDateStart}
-                                    className="input-reset ba b--light-gray pa2 mb2 db w-100" 
-                                />
-                            </div>
-                            <div className="w-100 mt2 mb3">
                                 <label className="f6 db mb2 mid-gray">Phone</label>
                                 <input 
                                     onChange={this.handleChange("contactPhone")} 
@@ -237,7 +244,26 @@ export default class EditProfile extends Component {
                                     className="input-reset ba b--light-gray pa2 mb2 db w-100" 
                                 />
                             </div>
-                            <span onClick={this.clickSubmit} className="link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib">Update</span>
+                            
+                            {
+                                this.state.currentSalonComponentList.map(function(component, index) {
+                                    return component;
+                                })
+                            }
+                            
+                            {
+                                this.state.previousSalonComponentList.map(function(component, index) {
+                                    return component;
+                                })
+                            }
+                            
+                            <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"space-between", width:"100%", marginTop:"50px" }}> 
+                                <button className="link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib" onClick={this.createCurrentSalon}>Add current salon</button>
+                                <button className="link ba b--moon-gray mid-gray ph3 pv2 mt2 mb4 dib" onClick={this.createPreviousSalon}>Add previous salon</button>
+                                <button onClick={this.clickSubmit} className="link ba white bg-black ph3 pv2 mt2 mb4 dib">Update</button>
+                            </div>
+                            
+
                         </form>
                     </div>
                 </div>

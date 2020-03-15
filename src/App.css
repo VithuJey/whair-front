@@ -1,35 +1,35 @@
 body {
   margin: 0;
-  font-family: 'Graphik-Regular','Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Graphik-Regular", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.fw3{
-  font-family:'Graphik-Regular';
+.fw3 {
+  font-family: "Graphik-Regular";
 }
-.fw2{
-  font-family:'Graphik-Light';
+.fw2 {
+  font-family: "Graphik-Light";
 }
 
-section{
+section {
   min-height: 40vh;
   margin: 2em 0;
 }
 
 ::selection {
-  background: #333; 
+  background: #333;
   color: white;
 }
 ::-moz-selection {
-  background: #333; 
+  background: #333;
   color: white;
 }
 
@@ -39,24 +39,24 @@ section{
 box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.1);
 } */
 
-.digestive{
-  font-family: 'Digestivev0.11trial-small';
+.digestive {
+  font-family: "Digestivev0.11trial-small";
 }
 
-.MainFooter{
+.MainFooter {
   height: 200px;
-  background: #CFD4D9;
+  background: #cfd4d9;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 3em;
 }
 
-.MainFooter a{
+.MainFooter a {
   margin: 0em 2em;
-  font-size: .75em;
+  font-size: 0.75em;
   color: #666;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -95,20 +95,86 @@ button:active {
   transform: scale(0.99);
 }
 
-.userItem{
-  box-shadow: 0 12px 24px rgba(0,0,0,.05);
-  transition: all .25s ease-in-out;
+.userItem {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease-in-out;
 }
-.form{
-  box-shadow: 0 12px 24px rgba(0,0,0,.05);
-  transition: all .25s ease-in-out;
+.form {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease-in-out;
 }
 
-.userItem:hover{
-  box-shadow: 0 24px 36px rgba(0,0,0,.1);
+.userItem:hover {
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.1);
   transform: scale(1.01);
 }
 
-.form:hover{
-  box-shadow: 0 48px 48px rgba(0,0,0,.1);
+.form:hover {
+  box-shadow: 0 48px 48px rgba(0, 0, 0, 0.1);
+}
+
+/* Fiver update-form css */
+
+.checkbox-button {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 11px 23px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+.checkbox-input {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-control {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  vertical-align: middle;
+  background-color: inherit;
+  color: #017b5f;
+  border: 2px solid #666;
+}
+
+.checkbox-input:checked + .checkbox-control:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #01a982;
+}
+
+.checkbox-input:checked + .checkbox-control {
+  border-color: #01a982;
+}
+
+.checkbox-control {
+  transform: scale(0.75);
+}
+
+.checkbox-label {
+  margin-left: -10px;
+}
+
+.date-picker {
+
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, .2);
+
 }
